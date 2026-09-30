@@ -1,0 +1,84 @@
+========================================
+DEPENDENCIES - PHOTOBOOTH
+========================================
+
+LIBRARY
+-------
+- opencv-python  ->  kamera & manipulasi gambar (Pertemuan 9)
+- pillow         ->  overlay frame & edit gambar (Pertemuan 10)
+- numpy          ->  operasi array (Pertemuan 10)
+
+CATATAN:
+Untuk Pertemuan 9, cukup install opencv-python.
+Pillow & numpy akan dipakai mulai Pertemuan 10.
+
+
+========================================
+WINDOWS
+========================================
+
+CEK LIBRARY
+python -m pip list | findstr /i "opencv pillow numpy"
+
+INSTALL LIBRARY
+python -m pip install opencv-python pillow numpy
+
+CEK VERSI
+python -c "import cv2; print('OpenCV:', cv2.__version__)"
+
+RUN PROGRAM
+python photobooth.py
+
+
+========================================
+MAC
+========================================
+
+CEK LIBRARY
+python3 -m pip list | grep -i "opencv\|pillow\|numpy"
+
+INSTALL LIBRARY
+python3 -m pip install opencv-python pillow numpy
+
+CEK VERSI
+python3 -c "import cv2; print('OpenCV:', cv2.__version__)"
+
+RUN PROGRAM
+python3 photobooth.py
+
+
+========================================
+FILE requirements.txt
+========================================
+
+Isi file (taruh di folder project):
+
+opencv-python
+pillow
+numpy
+
+Cara install dari file:
+python3 -m pip install -r requirements.txt
+
+
+========================================
+TROUBLESHOOTING
+========================================
+
+Error                          | Solusi
+-------------------------------|----------------------------------
+ModuleNotFoundError: cv2       | Install ulang OpenCV
+Permission denied              | Tambah --user di belakang command
+pip: command not found         | Pakai python -m pip (Win) /
+                               | python3 -m pip (Mac)
+
+
+========================================
+ATURAN EMAS
+========================================
+
+- Windows : python -m pip
+- Mac     : python3 -m pip
+- Jangan pakai "pip install" langsung
+- Bikin requirements.txt biar gampang
+  install di laptop lain

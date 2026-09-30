@@ -4,79 +4,40 @@
 # ============================================
 
 import cv2
-import numpy as np
-from PIL import Image
 from datetime import datetime
 
-# ============================================
-# BAGIAN 1: CEK VERSI & SETUP
-# ============================================
-
-print("=" * 50)
-print("PROJECT PHOTOBOOTH - PERTEMUAN 9")
-print("=" * 50)
-print(f"Versi OpenCV: {cv2.__version__}")
-print(f"Versi NumPy: {np.__version__}")
-print("=" * 50)
-
-# ============================================
-# BAGIAN 2: BUKA KAMERA
-# ============================================
-
+# Buka kamera
 cap = cv2.VideoCapture(0)
 
-# Cek apakah kamera berhasil dibuka
 if not cap.isOpened():
-    print("❌ Kamera TIDAK terdeteksi!")
-    print("   Coba ganti cv2.VideoCapture(0) jadi (1) atau (2)")
+    print("❌ Kamera tidak terdeteksi!")
     exit()
-else:
-    print("✅ Kamera berhasil dibuka!")
 
-# Set resolusi kamera
+# Set resolusi
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
 
-# ============================================
-# BAGIAN 3: TAMPILKAN VIDEO FEED
-# ============================================
-
-print("\n📸 Tekan 'c' untuk CAPTURE foto")
+print("📸 Tekan 'c' untuk CAPTURE")
 print("❌ Tekan 'q' untuk KELUAR\n")
 
-foto_counter = 0  # Hitung berapa foto yang diambil
-
+# Loop video feed
 while True:
-    # Baca frame dari kamera
     ret, frame = cap.read()
     
-    if not ret:
-        print("❌ Gagal membaca frame dari kamera")
-        break
+    cv2.imshow("Photobooth", frame)
     
-    # Tampilkan video feed
-    cv2.imshow("Photobooth - Pertemuan 9", frame)
-    
-    # Baca tombol yang ditekan
     key = cv2.waitKey(1) & 0xFF
     
-    # Tombol 'c' untuk capture
+    # Capture foto
     if key == ord('c'):
-        foto_counter += 1
-        nama_file = f"foto_{foto_counter}_{datetime.now().strftime('%H%M%S')}.jpg"
+        nama_file = f"foto_{datetime.now().strftime('%H%M%S')}.jpg"
         cv2.imwrite(nama_file, frame)
-        print(f"✅ Foto tersimpan: {nama_file}")
+        print(f"✅ Tersimpan: {nama_file}")
     
-    # Tombol 'q' untuk keluar
+    # Keluar
     elif key == ord('q'):
-        print("\n👋 Keluar dari program...")
         break
-
-# ============================================
-# BAGIAN 4: CLEANUP
-# ============================================
 
 cap.release()
 cv2.destroyAllWindows()
-print(f"\nTotal foto yang diambil: {foto_counter}")
 print("Program selesai!")
