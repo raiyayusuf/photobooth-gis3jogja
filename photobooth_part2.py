@@ -25,6 +25,7 @@ cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
 
 KW, KH = 500, 250
 f1, f2, f3 = None, None, None
+nomor_foto = 1 
 
 cv2.namedWindow("Photobooth", cv2.WINDOW_AUTOSIZE)
 cv2.moveWindow("Photobooth", 100, -10)
@@ -103,12 +104,14 @@ while True:
             k_final.paste(f3, (50, 600))
             akhir = Image.alpha_composite(k_final, frame_pil)
             
-            akhir.convert("RGB").save("hasil_photobooth.jpg")
-            print("Tersimpan: hasil_photobooth.jpg")
+            nama_file = f"hasil_photobooth{nomor_foto}.jpg"
+            akhir.convert("RGB").save(nama_file)
+            print(f"Tersimpan: {nama_file}")
             
             cv2.imshow("Hasil", cv2.cvtColor(np.array(akhir), cv2.COLOR_RGBA2BGR))
             cv2.moveWindow("Hasil", 650, 0)
             
+            nomor_foto += 1
             f1, f2, f3 = None, None, None
 
     elif key == ord('q'):
