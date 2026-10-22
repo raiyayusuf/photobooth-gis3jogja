@@ -32,7 +32,7 @@ while True:
     if key == ord('c'):
         nama_file = f"foto_{datetime.now().strftime('%H%M%S')}.jpg"
         cv2.imwrite(nama_file, frame)
-        print(f"✅ Tersimpan: {nama_file}")
+        print(f"Tersimpan: {nama_file}")
     
     # Keluar
     elif key == ord('q'):
